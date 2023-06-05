@@ -1,0 +1,184 @@
+ScrollViewExample:
+
+<ImagesExample@GridLayout>:
+    cols: 3
+    Image:
+        source: "images/cake.jpg"
+    Image:
+        source: "images/cake.jpg"
+        allow_stretch: True
+    Image:
+        source: "images/cake.jpg"
+        allow_stretch: True
+        keep_ratio: False
+        
+
+<WidgetsExample@GridLayout>:
+    cols: 3
+    padding: "10dp"
+    ToggleButton:
+        text: "OFF"
+        on_state: root.on_toggle_button_state(self)
+        size_hint: None, 1
+        width: "100dp"
+    Button:
+        text: "Count"
+        on_press: root.on_button_click()
+        disabled: not root.count_enabled
+    Label:
+        text: root.my_text
+        font_name: "fonts/Lcd.ttf"
+        font_size: "80dp" 
+        color: 1, .5, 1, 1
+    Switch:
+        id: my_switch
+        on_active: root.on_switch_active(self)
+        size_hint: None, .5
+        width: "100dp"
+        active: True
+        
+    Slider:
+        id: my_slider
+        min: 0
+        max: 100
+        value: 50
+        # on_value: root.on_slider_value(self)
+        orientation: "vertical"
+        disabled: not my_switch.active
+    BoxLayout:
+        orientation: "vertical"   
+        Label:
+            #text: root.slider_value_txt
+            text: str(int(my_slider.value))
+        ProgressBar:
+            max: 100
+            value: my_slider.value 
+    TextInput:
+        id: my_text_input
+        size_hint: None, 1
+        width: "100dp"
+        text: "Write here"
+        multiline: False
+        on_text_validate: root.on_text_validate(self)
+    Label:
+        text: "Your name is: " + root.text_input_str         
+
+<PageLayoutExample@PageLayout>:
+    MainWidget:
+    BoxLayoutExample:
+    AnchorLayoutExample:
+    GridLayoutExample:
+
+
+<ScrollViewExample@ScrollView>:
+#scrollview can take only one child
+    StackLayoutExample:
+        size_hint: 1, None
+        height: self.minimum_height
+   
+
+<StackLayoutExample>:
+# for the stacklayout the orientation is not just limited to horizontal and vertical.
+# left-right top-bottom (default is "lr-tb")
+    # orientation: "rl-bt"
+    # padding: ("20dp", "20dp", "20dp", "20dp")
+    # spacing: "20dp", "0dp"
+
+
+<GridLayoutExample@GridLayout>:
+# has mandatory properties; rows , cols
+    #cols: 3
+    rows: 2
+    Button:
+        text: "A"
+        size_hint: None, 1
+        width: "70dp"
+    # in this cell will now be displayed the BoxLayoutExample that was previously written
+    BoxLayoutExample:
+    Button:
+        text: "C"
+    Button:
+        text: "D"
+        size_hint: None, 1
+        width: "70dp"
+    Button:
+        text: "E"
+    Button:
+        text: "F"
+
+
+<AnchorLayoutExample>:
+    # right, left, center
+    anchor_x: "left"
+    # bottom, top, center
+    anchor_y: "top"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "5dp"
+        size_hint: .2, .2
+        pos_hint: {"x": .5}
+        Label:
+            text: "ButtonLabel"
+            size_hint: 1, .5
+            pos_hint: {"x": .5}
+        Button:
+            text: "A"
+            # size_hint: .2, .2 (taken out as size hint is in boxlayout)
+            pos_hint: {"x": .5}
+        Button:
+            text: "B"
+            # size_hint: .2, .2
+            pos_hint: {"x": .5}
+
+
+
+
+<BoxLayoutExample>:
+    orientation: "horizontal"
+    spacing: "10dp"
+    Button:
+        text: "A"
+        # size for a layout is proportional height and width
+        # if you size_hint is changed to None then the button becomes fixed to a size and the proportions wont change. you may then use size instead or width and height
+        size_hint: .5, .5
+        #width: "100dp"
+        #height: "60dp"
+        # controlling the position after size proportion is done with pos_hint
+        #x(where drawing of x begins left side), center_x(position of middle of the button), right(side of the button)
+        #y, center_y, top
+        pos_hint: {"center_y": .5}
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        Button:
+            text: "B1"
+        Button:
+            text: "B2"
+        Button:
+            text: "B3"
+        Button:
+            text: "B4"
+    Label:
+        text: "C"
+        
+    
+    
+    
+
+<MainWidget>:
+    Button:
+        text: "Blue"
+        size: "100dp", "100dp"
+        pos: "100dp", "400dp"
+        color: 0, 0, 1, 1
+    Button:
+        text: "Green"
+        size: "100dp", "100dp"
+        pos: "200dp", "400dp"
+        color: 0, 1, 0, 1
+    Label:
+        text: "This is a label"
+        size: "100dp", "100dp"
+        pos: "100dp", "500dp"
+        color: 1, 0, 0, 1
+    
